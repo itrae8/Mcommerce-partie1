@@ -1,0 +1,221 @@
+{
+	"info": {
+		"_postman_id": "d6ff9165-76e9-412c-aca1-03a5bd3dbbe4",
+		"name": "TestsMicroCommerce",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "localhost/AdminProduits",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "1ffc21b2-0323-4d35-9e58-83f3be189078",
+						"exec": [
+							"const jsonData = pm.response.json();\r",
+							"const expectedObject = {\r",
+							"    \"Product{id=1, nom='Ordinateur portable', prix=350}\": 230,\r",
+							"    \"Product{id=2, nom='Aspirateur Robot', prix=500}\": 300,\r",
+							"    \"Product{id=3, nom='Table de Ping Pong', prix=750}\": 350,\r",
+							"  };\r",
+							"  \r",
+							"pm.test(\"Good status\",function(){\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Good response\",function(){\r",
+							"    pm.expect(jsonData).to.deep.include(expectedObject);\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost/AdminProduits",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"AdminProduits"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "localhost/ProduitsTri",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "69c93d89-c180-4a40-9c8f-7a313e8799c6",
+						"exec": [
+							"const jsonData = pm.response.json();\r",
+							"const expectedObject = \r",
+							"[\r",
+							"    {\r",
+							"        \"id\": 2,\r",
+							"        \"nom\": \"Aspirateur Robot\",\r",
+							"        \"prix\": 500,\r",
+							"        \"prixAchat\": 200\r",
+							"    },\r",
+							"    {\r",
+							"        \"id\": 1,\r",
+							"        \"nom\": \"Ordinateur portable\",\r",
+							"        \"prix\": 350,\r",
+							"        \"prixAchat\": 120\r",
+							"    },\r",
+							"    {\r",
+							"        \"id\": 3,\r",
+							"        \"nom\": \"Table de Ping Pong\",\r",
+							"        \"prix\": 750,\r",
+							"        \"prixAchat\": 400\r",
+							"    }\r",
+							"];\r",
+							"\r",
+							"pm.test(\"Good status\",function(){\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Good response\",function(){\r",
+							"    pm.expect(jsonData).to.deep.eql(expectedObject);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost/ProduitsTri",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"ProduitsTri"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "localhost/Produits",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "4bfef495-ed42-437f-bd9d-b994774804f7",
+						"exec": [
+							"const jsonData = pm.response.json();\r",
+							"const expectedObject = {\r",
+							"    \"status\": 400,\r",
+							"    \"error\": \"Bad Request\",\r",
+							"    \"exception\": \"com.ecommerce.microcommerce.web.exceptions.ProduitGratuitException\",\r",
+							"    \"message\": \"Le prix d'achat du produit doit être supérieur à 0\",\r",
+							"    \"path\": \"/Produits\"\r",
+							"  };\r",
+							"  \r",
+							"pm.test(\"Good status\",function(){\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Good response\",function(){\r",
+							"    pm.expect(jsonData).to.deep.include(expectedObject);\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"nom\": \"Billard\",\r\n    \"prix\": 1000,\r\n    \"prixAchat\": 0\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost/Produits",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"Produits"
+					]
+				},
+				"description": "Ajout produit"
+			},
+			"response": []
+		},
+		{
+			"name": "localhost/Produits",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "58a4b11c-9674-47b0-8ac4-64865886ab59",
+						"exec": [
+							"const jsonData = pm.response.json();\r",
+							"const expectedObject = {\r",
+							"    \"status\": 400,\r",
+							"    \"error\": \"Bad Request\",\r",
+							"    \"exception\": \"org.springframework.web.bind.MethodArgumentNotValidException\",\r",
+							"    \"message\": \"Validation failed for object='product'. Error count: 1\",\r",
+							"  };\r",
+							"  \r",
+							"pm.test(\"Good status\",function(){\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Good response\",function(){\r",
+							"    pm.expect(jsonData).to.deep.include(expectedObject);\r",
+							"    pm.expect(pm.response.text()).to.include(\"doit être au minimum égal à 1\");\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"nom\": \"Billard\",\r\n    \"prix\": 0,\r\n    \"prixAchat\": 10\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost/Produits",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"Produits"
+					]
+				},
+				"description": "Ajout produit"
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}
