@@ -1,5 +1,6 @@
 package com.ecommerce.microcommerce.model;
 
+import com.ecommerce.microcommerce.annotations.PrixSuperieurAuPrixAchat;
 import com.fasterxml.jackson.annotation.JsonFilter;
 import org.hibernate.validator.constraints.Length;
 
@@ -10,6 +11,7 @@ import javax.validation.constraints.Min;
 
 @Entity
 //@JsonFilter("monFiltreDynamique")
+@PrixSuperieurAuPrixAchat()
 public class Product {
 
     @Id

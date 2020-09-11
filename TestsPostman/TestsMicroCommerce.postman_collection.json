@@ -107,7 +107,7 @@
 			"response": []
 		},
 		{
-			"name": "localhost/Produits",
+			"name": "localhost/Produits prix achat",
 			"event": [
 				{
 					"listen": "test",
@@ -162,12 +162,12 @@
 			"response": []
 		},
 		{
-			"name": "localhost/Produits",
+			"name": "(Bonus) localhost/Produits validation diff prix",
 			"event": [
 				{
 					"listen": "test",
 					"script": {
-						"id": "58a4b11c-9674-47b0-8ac4-64865886ab59",
+						"id": "8dcb3742-ec3b-4f23-987c-0b3a275db5d7",
 						"exec": [
 							"const jsonData = pm.response.json();\r",
 							"const expectedObject = {\r",
@@ -175,6 +175,7 @@
 							"    \"error\": \"Bad Request\",\r",
 							"    \"exception\": \"org.springframework.web.bind.MethodArgumentNotValidException\",\r",
 							"    \"message\": \"Validation failed for object='product'. Error count: 1\",\r",
+							"    \"path\": \"/Produits\"\r",
 							"  };\r",
 							"  \r",
 							"pm.test(\"Good status\",function(){\r",
@@ -183,9 +184,8 @@
 							"\r",
 							"pm.test(\"Good response\",function(){\r",
 							"    pm.expect(jsonData).to.deep.include(expectedObject);\r",
-							"    pm.expect(pm.response.text()).to.include(\"doit être au minimum égal à 1\");\r",
-							"});\r",
-							""
+							"    pm.expect(pm.response.text()).to.include(\"Le prix d'achat (1000) doit être moins élevé que le prix de vente (10)\");\r",
+							"});"
 						],
 						"type": "text/javascript"
 					}
@@ -196,7 +196,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"nom\": \"Billard\",\r\n    \"prix\": 0,\r\n    \"prixAchat\": 10\r\n}",
+					"raw": "{\r\n    \"nom\": \"Billard\",\r\n    \"prix\": 10,\r\n    \"prixAchat\": 1000\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -211,8 +211,7 @@
 					"path": [
 						"Produits"
 					]
-				},
-				"description": "Ajout produit"
+				}
 			},
 			"response": []
 		}
