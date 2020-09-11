@@ -78,8 +78,8 @@ public class ProductController {
 	@PostMapping(value = "/Produits")
 
 	public ResponseEntity<Void> ajouterProduit(@Valid @RequestBody Product product) {
-		
-		if(product.getPrixAchat() == 0) {
+
+		if (product.getPrixAchat() == 0) {
 			throw new ProduitGratuitException("Le prix d'achat du produit doit être supérieur à 0");
 		}
 
@@ -108,15 +108,16 @@ public class ProductController {
 
 	@GetMapping(value = "/AdminProduits")
 	public Map<Product, Integer> calculerMargeProduit() {
-		// Peut aussi retourner une liste d'objets avec un produit et un int en attributs
+		// Peut aussi retourner une liste d'objets avec un produit et un int en
+		// attributs
 		Map<Product, Integer> result = new HashMap<>();
-		
+
 		Iterable<Product> produits = productDao.findAll();
-		
+
 		produits.forEach(produit -> {
 			result.put(produit, produit.getPrix() - produit.getPrixAchat());
 		});
-		
+
 		return result;
 	}
 

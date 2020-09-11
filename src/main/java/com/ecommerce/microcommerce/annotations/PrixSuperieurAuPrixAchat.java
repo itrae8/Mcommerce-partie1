@@ -10,11 +10,13 @@ import javax.validation.Payload;
 
 import com.ecommerce.microcommerce.validator.PrixMatchValidator;
 
-@Target({ElementType.TYPE})
+@Target({ ElementType.TYPE })
 @Retention(RetentionPolicy.RUNTIME)
 @Constraint(validatedBy = PrixMatchValidator.class)
 public @interface PrixSuperieurAuPrixAchat {
 	String message() default "Le prix d'achat doit être moins élevé que le prix de vente";
+
 	Class<?>[] groups() default {};
-    Class<? extends Payload>[] payload() default {};
+
+	Class<? extends Payload>[] payload() default {};
 }
